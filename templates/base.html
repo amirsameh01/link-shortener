@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <style>
+    .header {
+      background: #007bff;
+      color: #fff; 
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between; 
+      align-items: center;
+    }
+
+    .title {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="header">
+    <h4>URL Shortener</h4>
+
+    <div>
+      {% if request.user.is_authenticated %}
+      <span>Hi {{ request.user.username | title }}</span>
+      <a href="{% url 'logout' %}" class="btn btn-light">Logout</a>
+      {% else %}
+      <a href="{% url 'login' %}" class="btn btn-light">Login</a>
+      <a href="{% url 'register' %}" class="btn btn-light">Register</a>
+      {% endif %}
+    </div>
+
+  </div>
+  {% block content %}
+  {% endblock content %}
+</body>
